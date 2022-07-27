@@ -17,8 +17,12 @@ const Cart = (): JSX.Element => {
     const { cart, removeProduct, updateProductAmount } = useCart();
 
     const cartFormatted = cart.map(product => ({
-        // TODO
-    }))
+        ...product,
+        priceFormatted: formatPrice(product.price),
+        subTotal: formatPrice(product.price * product.amount)
+    }));
+
+
     const total =
         formatPrice(
             cart.reduce((sumTotal, product) => {
@@ -29,11 +33,18 @@ const Cart = (): JSX.Element => {
     console.log(total);
 
     function handleProductIncrement(product: Product) {
-        // TODO
+        const newProduct = { ...product };
+        newProduct.amount++;
+
+        console.log(newProduct);
+
+        updateProductAmount({ productId: product.id, amount: product.amount++ });
+
+
     }
 
     function handleProductDecrement(product: Product) {
-        // TODO
+        updateProductAmount({ productId: product.id, amount: product.amount-- });
     }
 
     function handleRemoveProduct(productId: number) {
@@ -56,7 +67,7 @@ const Cart = (): JSX.Element => {
                 </thead>
 
                 {
-                    cart.map((product) => {
+                    cartFormatted.map((product) => {
                         return (
                             <tbody key={product.id}>
                                 <tr data-testid="product">
@@ -65,7 +76,7 @@ const Cart = (): JSX.Element => {
                                     </td>
                                     <td>
                                         <strong> {product.title}</strong>
-                                        <span> {product.price}</span>
+                                        <span> {product.priceFormatted}</span>
                                     </td>
                                     <td>
                                         <div>
@@ -81,7 +92,7 @@ const Cart = (): JSX.Element => {
                                                 type="text"
                                                 data-testid="product-amount"
                                                 readOnly
-                                                value={2}
+                                                value={product.amount}
                                             />
                                             <button
                                                 type="button"
@@ -93,7 +104,7 @@ const Cart = (): JSX.Element => {
                                         </div>
                                     </td>
                                     <td>
-                                        <strong>R$ 359,80</strong>
+                                        <strong> {product.subTotal}</strong>
                                     </td>
                                     <td>
                                         <button
