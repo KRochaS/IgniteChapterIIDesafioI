@@ -38,8 +38,6 @@ Chapter II Challenge from Ignite @Rocketseat
 
 - Display of error messages;
 
-- Between others.
-
 ## :test_tube: Test Checklist 
 - **should be able to render the amount of products added to cart**
 
