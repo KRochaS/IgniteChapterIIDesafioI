@@ -3,7 +3,7 @@
 </p>
 
 <h4 align="center"> 
-Chapter II Challenge: Finished :heavy_check_mark:
+Chapter II Challenge I: Finished :heavy_check_mark:
 </h4>
 
 <p align="center">	
